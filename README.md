@@ -1,71 +1,93 @@
-# Security-BI-Project
-🔐 Encrypted Car Listings Scraper & Analyzer
-A complete data pipeline for securely scraping, storing, and analyzing car listings from Tayara.tn — one of Tunisia’s most popular e-commerce platforms for classified ads.
+# 🔐 Encrypted Car Listings Scraper & Analyzer
 
-Developed by Oumayma Abayed and Eslem Sebri
+A complete data pipeline for securely scraping, storing, and analyzing car listings from [Tayara.tn](https://www.tayara.tn) — one of Tunisia’s most popular e-commerce platforms for classified ads.
+
+Developed by **Oumayma Abayed** and **Eslem Sebri**  
 📅 Project Date: May 2025
 
-📌 Project Overview
+---
+
+## 📌 Project Overview
+
 This project builds a secure, end-to-end workflow:
 
-Scrape vehicle listings from the “Véhicules” section of Tayara.tn.
+1. **Scrape** vehicle listings from the “Véhicules” section of Tayara.tn.  
+2. **Clean** and structure the extracted data.  
+3. **Encrypt** the dataset to protect sensitive information.  
+4. **Analyze** the data via a user-friendly interface.
 
-Clean and structure the extracted data.
+The goal was to extract real-time insights from Tunisia’s used car market while maintaining security and ethical scraping practices.
 
-Encrypt the dataset to protect sensitive information.
+---
 
-Analyze the data via a simple, user-friendly interface.
+## 🔧 Tech Stack
 
-The goal was to extract real-time insights from Tunisia’s used car market while respecting data security and responsible scraping practices.
+- **Python**
+  - `Selenium` — Web scraping
+  - `Pandas`, `NumPy` — Data cleaning & structuring
+  - `cryptography` — AES-based Fernet encryption
+  - `Tkinter` — Desktop GUI interface
 
-🔧 Tech Stack
-Python
+---
 
-Selenium (Web scraping)
+## 🧩 Features
 
-Pandas, NumPy (Data cleaning)
+### ✅ Web Scraper
 
-cryptography (Data encryption via Fernet)
+- Targets the first 18 pages of Tayara.tn's “Véhicules” section.
+- Loads JavaScript-rendered content with Selenium (headless Chrome).
+- Extracts:
+  - Title
+  - Price
+  - Mileage
+  - Brand, Model, Year
+  - Gearbox, Fuel, Color, State
+  - Engine capacity, Body type
+  - URL link to listing
 
-Tkinter (Graphical User Interface)
+### ✅ Data Pipeline
 
-🧩 Features
-✅ Web Scraper
-Scrapes listings from the first 18 pages of Tayara.tn’s car section.
+- Clean and structure the raw data using Pandas.
+- Export to CSV for accessibility.
+- Encrypt CSV using Fernet (AES-based symmetric encryption).
 
-Dynamically loads JavaScript-rendered content using Selenium with a headless browser.
+### ✅ GUI Interface (Tkinter)
 
-Extracts:
+Two modes available:
 
-Title
+- **User Mode**:  
+  - Filter listings by brand, fuel, state, color, and gearbox.
 
-Price
+- **Analysis Mode**:  
+  - Visualize:
+    - Price distributions
+    - Average price per brand
+    - Listing frequency over time
 
-Mileage
+---
 
-Year, Brand, Model
+## 🛡️ Encryption & Security
 
-Gearbox, Fuel, Color, State, Engine capacity, Body type
+- Uses a generated Fernet key (`encryption.key`) for all encryption/decryption.
+- Data is encrypted before storage and can only be decrypted via the interface using the correct key.
+- Ensures privacy and prevents unauthorized access.
 
-✅ Data Pipeline
-Cleans and exports the data to CSV.
+---
 
-Encrypts the dataset using AES-based Fernet encryption.
+## 📁 Project Structure
 
-Secures sensitive information by storing the key in a separate file.
-
-✅ Interface (Tkinter GUI)
-User Mode: Filter listings by brand, fuel type, state, color, and gearbox.
-
-Analysis Mode: Visualize:
-
-Price distributions
-
-Average price per brand
-
-Frequency of listings
-
-🛡️ Encryption & Security
-Generates a symmetric key (encryption.key) used with Fernet for both encryption and decryption.
-
-Prevents unauthorized access to data while maintaining usability via a secure decryption flow.
+```text
+.
+├── scraper/
+│   └── tayara_scraper.py
+├── data/
+│   ├── tayara_vehicles_cleaned.csv
+│   └── tayara_vehicles_cleaned_encrypted.csv
+├── encryption/
+│   ├── encrypt.py
+│   ├── decrypt.py
+│   └── encryption.key
+├── interface/
+│   └── gui_app.py
+├── requirements.txt
+└── README.md
